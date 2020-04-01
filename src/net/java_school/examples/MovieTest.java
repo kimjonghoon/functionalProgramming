@@ -5,6 +5,10 @@ import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
+import static java.util.Comparator.comparing;
+import java.util.Comparator;
+import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.joining;
 
 public class MovieTest {
 
@@ -20,7 +24,7 @@ public class MovieTest {
 	}
 
 	public static void main(String[] args) throws Exception {
-		String fileName = "./src/movies.txt";
+		String fileName = "movies.txt";
 		String str = null;
 		List<Movie> movies = new ArrayList<>();
 
@@ -32,13 +36,9 @@ public class MovieTest {
 			}
 		}
 
-		//List<Movie> result = filterMovies(movies, new Rated8OrAbovePredicate()); //1.
-		//List<Movie> result = filterMovies(movies, (Movie movie) -> movie.getUserRatings() >= 8.0); //2.
-		//List<Movie> result = filterMovies(movies, Movie::isPopular); //3.
 		Predicate<Movie> popularMovies = Movie::isPopular;
-		//List<Movie> result = filterMovies(movies, popularMovies.negate()); //4.
-		List<Movie> result = filterMovies(movies, popularMovies.negate().and(m -> m.getReleaseDate() > 2015)); //5.
-
+		List<Movie> result = filterMovies(movies, popularMovies.negate().and(m -> m.getReleaseDate() > 2015));
+		
 		for (Movie movie : result) {
 			System.out.println(movie);
 		}

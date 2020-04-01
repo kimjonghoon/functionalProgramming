@@ -1,10 +1,13 @@
 # java 8 functional programming example
 
-### how to run
-	~/functionalProgramming$ cd src/net/java_school/examples/
-	~/functionalProgramming/src/net/java_school/examples$ javac -d ../../../../bin *.java
-	~/functionalProgramming/src/net/java_school/examples$ cd -
-	~/functionalProgramming$ java -cp ./bin net.java_school.examples.MovieTest
-	Small Town Crime,2017,6.6
-	The Commuter,2018,6.3
-	Tschick,2016,7.0
+### how to run (Windows)
+	cd src\net\java_school\examples\
+	javac -d ..\..\..\..\out *.java
+	xcopy src\movies.txt out
+	cd ..\..\..\..\
+	java -cp out net.java_school.examples.MovieTest
+
+### How to run (Linux)
+	javac -d out -sourcepath src $(find src -name "*.java")
+	cp src/movies.txt out/
+	java -cp out net.java_school.examples.MovieTest
